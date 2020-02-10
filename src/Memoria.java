@@ -14,7 +14,7 @@ public class Memoria {
     private TipoComando ultimaOperacao = null;
     private boolean substituir = false;
     private String textoAtual = "";
-    private String textoBuffer = "0";
+    private String textoBuffer = "";
 
     private Memoria() { }
 
@@ -54,7 +54,7 @@ public class Memoria {
                 substituir = false;
                 break;
             case SINAL:
-                if (!"0".equals(textoAtual)) {
+                if (!"0".equals(getTextoAtual())) {
                     if (textoAtual.startsWith("-")) {
                         textoAtual = textoAtual.replace("-", "");
                     } else {
@@ -64,7 +64,7 @@ public class Memoria {
                 break;
             default:
                 substituir = true;
-                try { textoAtual = obterResultado(tipoComando); } catch (Exception e) {}
+                try { textoAtual = obterResultado(tipoComando); } catch (Exception e) {e.printStackTrace();}
                 textoBuffer = textoAtual;
                 ultimaOperacao = tipoComando;
                 break;
